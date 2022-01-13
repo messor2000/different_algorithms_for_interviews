@@ -1,14 +1,17 @@
 package sliding_window;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class StringPermutation {
+public class StringAnagrams {
     public static void main(String[] args) {
-        System.out.println(findPermutation("aaacb", "abc"));
+        System.out.println(findStringAnagrams("abbcabc", "abc"));
     }
 
-    public static boolean findPermutation(String str, String pattern) {
+    public static List<Integer> findStringAnagrams(String str, String pattern) {
+        List<Integer> resultIndices = new ArrayList<>();
         Map<Character, Integer> map = new HashMap<>();
         int start = 0;
         int matched = 0;
@@ -28,7 +31,7 @@ public class StringPermutation {
             }
 
             if (matched == map.size()) {
-                return true;
+                resultIndices.add(end);
             }
 
             if (end >= pattern.length() - 1) {
@@ -39,10 +42,11 @@ public class StringPermutation {
                         matched--;
                     }
                     map.put(left, map.get(left) + 1);
+
                 }
             }
         }
 
-        return false;
+        return resultIndices;
     }
 }
